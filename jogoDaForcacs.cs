@@ -18,6 +18,8 @@ namespace jogoDaForcacs
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		int erros;
+		
 		public MainForm()
 		{
 			//
@@ -31,16 +33,12 @@ namespace jogoDaForcacs
 		}
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			string palavra;
-			string letra;
-			string resposta;
-			int erros;
-			
 			//desabilitar botões
 			button2.Enabled = false;
 			button3.Enabled = false;
 			textBox3.Enabled = false;
 			textBox2.Enabled = false;
+			
 	
 		}
 		void Button1Click(object sender, EventArgs e)
@@ -72,29 +70,55 @@ namespace jogoDaForcacs
 		}
 		void Button3Click(object sender, EventArgs e)
 		{
-			string palavra;
+			string palavra = textBox1.Text;
 			string letra;
 			int vezesEncontradas = 0;
-			letra = textBox2.Text;
+
+			
+			letra = textBox2.Text.Trim().ToLower(); // Remove espaços e converte para minúsculo;
 			textBox2.Focus();
 			
+			// Verifica se o usuário inseriu apenas uma letra
 			if(string.IsNullOrWhiteSpace(textBox2.Text) || letra.Length > 1) {
 				MessageBox.Show("Insira apenas uma letra");
 				return;
 			}
-			for(int i = 0; i < palavra.Length; i++) 
-			{
-				if(letra[0] == palavra[i]) 
-				{
-					vezesEncontradas++;
-				}
-					if(vezesEncontradas >= 1)
-					{
-						listBox1.Items.Add("A letra" + letra + "aparece" + vezesEncontradas + "vez(es)");
-					}
+			
+			for(int i = 0; i < palavra.Length; i++) {
+				if (letra[0] == char.ToLower(palavra[i])) {
+			        vezesEncontradas++;
+			        
+				} 
 			}
 			
-		
+			// Verifica se a letra foi encontrada e exibe a mensagem no listBox1
+			if(vezesEncontradas >= 1) {
+				listBox1.Items.Add(letra + ": aparece " + vezesEncontradas + " vez(es)");
+			} 
+			else
+			{ 
+				erros++;
+				listBox1.Items.Add(letra + ": não aparece." + " Erros: " + erros);				
+			}
+			if(erros == 6) {
+				textBox2.Enabled = false;
+				button3.Enabled = false;
+				 MessageBox.Show("Você atingiu o número máximo de erros.");
+			}
+			
+		}
+		void Button2Click(object sender, EventArgs e)
+		{
+			string palavra = textBox1.Text;
+			string resposta = textBox3.Text;
+			if(palavra == resposta) {
+				label6.Text = "Resposta Correta";
+				label6.ForeColor = Color.Green;
+			} else {
+				label6.Text = "Resposta Errada";
+				label6.ForeColor = Color.Red;
+				return;
+			}
 		}
 	}
 }
