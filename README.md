@@ -155,7 +155,7 @@ if(palavra == resposta) {
 
 ## Conclusão
 
-Este projeto do Jogo da Forca foi desenvolvido com o intuito de aprofundar conhecimentos em programação com C#, principalmente na construção de interfaces gráficas e na lógica de jogos. 
+Este projeto do Jogo da Forca foi desenvolvido com o intuito de aprofundar conhecimentos em lógica programação com C#, principalmente na construção de interfaces gráficas e na lógica de jogos. 
 
 É uma aplicação voltada para aprendizado e prática, sendo ideal para quem deseja explorar conceitos de desenvolvimento de software de forma prática e didática. 
 
